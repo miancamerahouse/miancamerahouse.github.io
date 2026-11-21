@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mian Camera House · Thuê máy ảnh Phú Yên</title>
+<meta name="description" content="Đặt lịch thuê máy ảnh tại Mian Camera House – Tuy Hoà, Phú Yên.">
+<meta property="og:title" content="Mian Camera House · Thuê máy ảnh Phú Yên">
+<meta property="og:description" content="Xem lịch trống và đặt máy ảnh online.">
+<style>
+  html,body{margin:0;height:100%;background:#f6efe4;font-family:system-ui,-apple-system,sans-serif;color:#4a3a32}
+  .ld{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px}
+  .ld b{font-family:Georgia,serif;font-size:26px;letter-spacing:.04em;font-weight:600}
+  .ld span{font-size:13px;opacity:.7}
+  .sp{width:28px;height:28px;border:3px solid #e3d3bd;border-top-color:#8a5a3b;border-radius:50%;animation:r 1s linear infinite}
+  @keyframes r{to{transform:rotate(360deg)}}
+  .ld button{margin-top:6px;padding:10px 22px;border-radius:999px;border:1px solid #8a5a3b;background:#8a5a3b;color:#fff;font-size:14px}
+</style>
+</head>
+<body>
+<div class="ld" id="ld"><b>Mian Camera House</b><div class="sp"></div><span>Đang mở lịch máy…</span></div>
+<script>
+(function () {
+  var API = 'https://script.google.com/macros/s/AKfycbxHQIfW0QrO6dXGH921H_H-LUAFZRgnvq8nJZtoNw7XI6RqI7rhevx4zMvBeXvbbfBy/exec';
+  function fail() {
+    document.getElementById('ld').innerHTML = '<b>Mian Camera House</b><span>Chưa tải được lịch, bạn thử lại giúp Mian nha.</span>' +
+      '<button onclick="location.reload()">Thử lại</button>' +
+      '<span>Hoặc nhắn shop qua Instagram @miancamera.house</span>';
+  }
+  fetch(API + '?api=ui', { credentials: 'omit' })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j || !j.ok || !j.html) throw 0;
+      var html = j.html.replace(/<head([^>]*)>/i, '<head$1><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Mian Camera House · Thuê máy ảnh Phú Yên</title><script>window.MIAN_API=' + JSON.stringify(API) + ';<\/script>');
+      document.open(); document.write(html); document.close();
+    })
+    .catch(fail);
+})();
+</script>
+</body>
+</html>
